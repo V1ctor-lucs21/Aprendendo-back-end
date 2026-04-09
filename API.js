@@ -17,6 +17,12 @@ let pets = [
 
 app.use(express.json());
 
+// Middleware de Logging
+// Este middleware será executado para cada requisição que chegar ao servidor.
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}` );
+    next(); // Chama o próximo middleware ou rota
+   });
 // READ (Buscar um pet específico por ID)
 app.get("/pets",(req,res)=>{
     res.status(200).json(pets)
